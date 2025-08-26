@@ -1,0 +1,37 @@
+# Python artifacts
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Jupyter notebooks
+*.ipynb
+
+# Environment files
+.env
+*.env
+
+# Model files
+model/*.pkl
+*.joblib
+
+# Dataset files
+datasets/*.csv
+
+# Logs and outputs
+*.log
+*.out
+
+# OS-specific
+.DS_Store
+Thumbs.db
+
+# Virtual environments
+venv/
+.env/
+.venv/
+
+# IDE configs
+.vscode/
+.idea/
