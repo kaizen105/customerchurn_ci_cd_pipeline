@@ -11,7 +11,6 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
@@ -19,21 +18,27 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.12'
+          python-version: "3.12"
 
       - name: Install dependencies
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
 
-      - name: Train Model
+      - name: Train churn model
         run: |
-          python models/train.py
+          python models/train.py   # <-- make sure your churn training script is here
 
-      - name: Evaluate Model
+      - name: Evaluate churn model
         run: |
-          python models/evaluate.py
+          python models/evaluate.py  # <-- churn evaluation script
 
       - name: Run Unit Tests
         run: |
           python -m unittest discover -s tests
+
+      - name: Deploy to Render
+        run: |
+          curl -X POST "https://api.render.com/v1/services/${{ secrets.RENDER_SERVICE_ID }}/deploys" \
+            -H "Accept: application/json" \
+            -H "Authorization: Bearer ${{ secrets.RENDER_API_KEY }}"
